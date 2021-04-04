@@ -23,7 +23,7 @@ module.exports = class ServiceRepository {
     const subscriptionId = Math.random().toString(36).substr(2, 9);
     const userId = 1; // FIXME: give the id later.
     const dailyPhraseCount = await this.getDailyPhraseCount(bibles, period);
-    const queryString = `insert into subscriptions (subs_id, user_id, bible, count, type, created_at) values (?, ?, ?, ?, ?, (now()+interval 9 hour))`;
+    const queryString = `insert into subscriptions (subs_id, user_id, bible, count, type, created_at) values (?, ?, ?, ?, ?, now())`;
     try {
       for (const bible of bibles) {
         await this._baseRepo.insert(queryString, [
@@ -176,7 +176,7 @@ module.exports = class ServiceRepository {
       } else {
         updatedPhrase = lastPhrase.last_phrase + dailyCount;
       }
-      const queryString = `insert into logs (subs_id, last_phrase, sent_at) values (?, ?, (now()+interval 9 hour))`;
+      const queryString = `insert into logs (subs_id, last_phrase, sent_at) values (?, ?, now())`;
       await this._baseRepo.insert(queryString, [subs, updatedPhrase]);
       return true;
     } catch (err) {
