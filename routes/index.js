@@ -4,6 +4,11 @@ const router = express.Router();
 const ServiceRepository = require("../repositories/ServiceRepo");
 const _serviceRepo = new ServiceRepository();
 
+router.get("/", async (req, res, next) => {
+  const bibles = await _serviceRepo.getBibles();
+  res.status(200).send(bibles);
+});
+
 router.post("/calculate", async (req, res, next) => {
   const {
     body: { bibles, period },
@@ -62,8 +67,8 @@ router.post("/check", async (req, res, next) => {
     body: { user, subs },
   } = req;
   const percentage = await _serviceRepo.checkPercentage(user, subs);
-  const trimmedPercentage = percentage.toFixed(4)
-  res.status(200).send(`progress: ${trimmedPercentage*100}%`)
+  const trimmedPercentage = percentage.toFixed(4);
+  res.status(200).send(`progress: ${trimmedPercentage * 100}%`);
 });
 
 module.exports = router;

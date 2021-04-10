@@ -7,6 +7,14 @@ module.exports = class ServiceRepository {
     this._baseRepo = new BaseRepository();
   }
 
+  // directly called from '/get'
+  async getBibles() {
+    const queryString = `select distinct bible from bibles`;
+    const bibles = await this._baseRepo.selectAll(queryString);
+    const arrayBibles = bibles.map((bible) => bible.bible);
+    return arrayBibles;
+  }
+
   // directly called from '/calculate'
   async getDailyPhraseCount(bibles, period) {
     const phrases = await this.calculatePhrases(bibles);
