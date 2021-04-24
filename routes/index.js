@@ -18,7 +18,7 @@ router.post("/calculate", async (req, res, next) => {
     period
   );
   const dailyPhraseCountString = dailyPhraseCount.toString();
-  if (result !== false) {
+  if (dailyPhraseCountString !== false) {
     res.status(200).send(dailyPhraseCountString);
     return;
   }
