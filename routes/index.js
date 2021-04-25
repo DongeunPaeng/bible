@@ -76,7 +76,7 @@ router.post("/auth", async (req, res, next) => {
     body: { phoneNumber },
   } = req;
   console.log(phoneNumber);
-  res.status(200).send("Hello, nice to meet you!");
+  res.status(200).send("Test, nice to meet you!");
 });
 
 module.exports = router;
