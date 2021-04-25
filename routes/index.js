@@ -71,4 +71,12 @@ router.post("/check", async (req, res, next) => {
   res.status(200).send(`progress: ${trimmedPercentage * 100}%`);
 });
 
+router.post("/auth", async (req, res, next) => {
+  const {
+    body: { phoneNumber },
+  } = req;
+  console.log(phoneNumber);
+  res.status(200).send("Hello, nice to meet you!");
+});
+
 module.exports = router;
